@@ -1,0 +1,801 @@
+{
+  "id": "la_pampa",
+  "name": "La Pampa",
+  "region": "Madre de Dios, Peru",
+  "coordinates": {
+    "lat": -12.866,
+    "lon": -69.665
+  },
+  "status": "demo_loaded",
+  "uploaded_to_prototype": true,
+  "summary": "Alluvial-mining frontier south of the Inambari River.",
+  "available_years": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "available_periods": [
+    "2018 → 2019",
+    "2019 → 2020",
+    "2020 → 2021",
+    "2021 → 2022"
+  ],
+  "layers": {
+    "sentinel2": {
+      "2018": {
+        "type": "sentinel2",
+        "title": "Satellite image",
+        "subtitle": "Sentinel-2 composite · 2018",
+        "asset": "la_pampa/sentinel_2018.png",
+        "thumbnail": "la_pampa/sentinel_2018_thumb.png",
+        "source": "Sentinel-2 L2A",
+        "year": 2018,
+        "bands": {
+          "1": "B02 Blue",
+          "2": "B03 Green",
+          "3": "B04 Red",
+          "4": "B08 NIR, if available"
+        },
+        "crs": "EPSG:32719",
+        "resolution": [
+          10.0,
+          -10.0
+        ],
+        "display": {
+          "stretch": "percentile",
+          "p2": 56.0,
+          "p98": 1031.0
+        },
+        "stats": {
+          "nonzero_pixels": 37997638,
+          "min": 0.0,
+          "max": 4066.0
+        },
+        "ui_note": "Render title/source in UI. PNG contains image pixels only."
+      },
+      "2019": {
+        "type": "sentinel2",
+        "title": "Satellite image",
+        "subtitle": "Sentinel-2 composite · 2019",
+        "asset": "la_pampa/sentinel_2019.png",
+        "thumbnail": "la_pampa/sentinel_2019_thumb.png",
+        "source": "Sentinel-2 L2A",
+        "year": 2019,
+        "bands": {
+          "1": "B02 Blue",
+          "2": "B03 Green",
+          "3": "B04 Red",
+          "4": "B08 NIR, if available"
+        },
+        "crs": "EPSG:32719",
+        "resolution": [
+          10.0,
+          -10.0
+        ],
+        "display": {
+          "stretch": "percentile",
+          "p2": 98.0,
+          "p98": 921.0
+        },
+        "stats": {
+          "nonzero_pixels": 30410756,
+          "min": 0.0,
+          "max": 3940.0
+        },
+        "ui_note": "Render title/source in UI. PNG contains image pixels only."
+      },
+      "2020": {
+        "type": "sentinel2",
+        "title": "Satellite image",
+        "subtitle": "Sentinel-2 composite · 2020",
+        "asset": "la_pampa/sentinel_2020.png",
+        "thumbnail": "la_pampa/sentinel_2020_thumb.png",
+        "source": "Sentinel-2 L2A",
+        "year": 2020,
+        "bands": {
+          "1": "B02 Blue",
+          "2": "B03 Green",
+          "3": "B04 Red",
+          "4": "B08 NIR, if available"
+        },
+        "crs": "EPSG:32719",
+        "resolution": [
+          10.0,
+          -10.0
+        ],
+        "display": {
+          "stretch": "percentile",
+          "p2": 187.0,
+          "p98": 1476.0
+        },
+        "stats": {
+          "nonzero_pixels": 9314640,
+          "min": 0.0,
+          "max": 3464.0
+        },
+        "ui_note": "Render title/source in UI. PNG contains image pixels only."
+      },
+      "2021": {
+        "type": "sentinel2",
+        "title": "Satellite image",
+        "subtitle": "Sentinel-2 composite · 2021",
+        "asset": "la_pampa/sentinel_2021.png",
+        "thumbnail": "la_pampa/sentinel_2021_thumb.png",
+        "source": "Sentinel-2 L2A",
+        "year": 2021,
+        "bands": {
+          "1": "B02 Blue",
+          "2": "B03 Green",
+          "3": "B04 Red",
+          "4": "B08 NIR, if available"
+        },
+        "crs": "EPSG:32719",
+        "resolution": [
+          10.0,
+          -10.0
+        ],
+        "display": {
+          "stretch": "percentile",
+          "p2": 202.0,
+          "p98": 1471.0
+        },
+        "stats": {
+          "nonzero_pixels": 37997667,
+          "min": 100.0,
+          "max": 5558.0
+        },
+        "ui_note": "Render title/source in UI. PNG contains image pixels only."
+      },
+      "2022": {
+        "type": "sentinel2",
+        "title": "Satellite image",
+        "subtitle": "Sentinel-2 composite · 2022",
+        "asset": "la_pampa/sentinel_2022.png",
+        "thumbnail": "la_pampa/sentinel_2022_thumb.png",
+        "source": "Sentinel-2 L2A",
+        "year": 2022,
+        "bands": {
+          "1": "B02 Blue",
+          "2": "B03 Green",
+          "3": "B04 Red",
+          "4": "B08 NIR, if available"
+        },
+        "crs": "EPSG:32719",
+        "resolution": [
+          10.0,
+          -10.0
+        ],
+        "display": {
+          "stretch": "percentile",
+          "p2": 1166.0,
+          "p98": 2382.0
+        },
+        "stats": {
+          "nonzero_pixels": 37997667,
+          "min": 1056.0,
+          "max": 7216.0
+        },
+        "ui_note": "Render title/source in UI. PNG contains image pixels only."
+      },
+      "2023": {
+        "type": "sentinel2",
+        "title": "Satellite image",
+        "subtitle": "Sentinel-2 composite · 2023",
+        "asset": "la_pampa/sentinel_2023.png",
+        "thumbnail": "la_pampa/sentinel_2023_thumb.png",
+        "source": "Sentinel-2 L2A",
+        "year": 2023,
+        "bands": {
+          "1": "B02 Blue",
+          "2": "B03 Green",
+          "3": "B04 Red",
+          "4": "B08 NIR, if available"
+        },
+        "crs": "EPSG:32719",
+        "resolution": [
+          10.0,
+          -10.0
+        ],
+        "display": {
+          "stretch": "percentile",
+          "p2": 1196.0,
+          "p98": 2411.0
+        },
+        "stats": {
+          "nonzero_pixels": 37997667,
+          "min": 1074.0,
+          "max": 6460.0
+        },
+        "ui_note": "Render title/source in UI. PNG contains image pixels only."
+      },
+      "2024": {
+        "type": "sentinel2",
+        "title": "Satellite image",
+        "subtitle": "Sentinel-2 composite · 2024",
+        "asset": "la_pampa/sentinel_2024.png",
+        "thumbnail": "la_pampa/sentinel_2024_thumb.png",
+        "source": "Sentinel-2 L2A",
+        "year": 2024,
+        "bands": {
+          "1": "B02 Blue",
+          "2": "B03 Green",
+          "3": "B04 Red",
+          "4": "B08 NIR, if available"
+        },
+        "crs": "EPSG:32719",
+        "resolution": [
+          10.0,
+          -10.0
+        ],
+        "display": {
+          "stretch": "percentile",
+          "p2": 1273.0,
+          "p98": 2514.0
+        },
+        "stats": {
+          "nonzero_pixels": 37997667,
+          "min": 1127.0,
+          "max": 6004.0
+        },
+        "ui_note": "Render title/source in UI. PNG contains image pixels only."
+      }
+    },
+    "mapbiomas": {
+      "2018": {
+        "type": "mapbiomas",
+        "title": "Land-cover map",
+        "subtitle": "MapBiomas / GEE classification · 2018",
+        "asset": "la_pampa/mapbiomas_2018.png",
+        "thumbnail": "la_pampa/mapbiomas_2018_thumb.png",
+        "source": "MapBiomas Amazonia Collection 6 / GEE",
+        "year": 2018,
+        "crs": "EPSG:32719",
+        "resolution": [
+          30.0,
+          -30.0
+        ],
+        "classes": {
+          "3": {
+            "name": "Forest formation",
+            "color": "#1f8d49",
+            "pixels": 683751,
+            "percent_valid": 48.547
+          },
+          "6": {
+            "name": "Flooded forest",
+            "color": "#026975",
+            "pixels": 368315,
+            "percent_valid": 26.1507
+          },
+          "11": {
+            "name": "Wetland",
+            "color": "#519799",
+            "pixels": 15507,
+            "percent_valid": 1.101
+          },
+          "15": {
+            "name": "Pasture",
+            "color": "#edde8e",
+            "pixels": 10722,
+            "percent_valid": 0.7613
+          },
+          "21": {
+            "name": "Mosaic of uses",
+            "color": "#ffefc3",
+            "pixels": 236835,
+            "percent_valid": 16.8155
+          },
+          "24": {
+            "name": "Urban area",
+            "color": "#d4271e",
+            "pixels": 1435,
+            "percent_valid": 0.1019
+          },
+          "25": {
+            "name": "Other non-vegetated area",
+            "color": "#db4d4f",
+            "pixels": 11179,
+            "percent_valid": 0.7937
+          },
+          "30": {
+            "name": "Mining",
+            "color": "#9c0027",
+            "pixels": 27020,
+            "percent_valid": 1.9184
+          },
+          "33": {
+            "name": "River, lake and ocean",
+            "color": "#2532e4",
+            "pixels": 53666,
+            "percent_valid": 3.8103
+          }
+        },
+        "ui_note": "Render legend in UI from classes. PNG contains raster colors only."
+      },
+      "2019": {
+        "type": "mapbiomas",
+        "title": "Land-cover map",
+        "subtitle": "MapBiomas / GEE classification · 2019",
+        "asset": "la_pampa/mapbiomas_2019.png",
+        "thumbnail": "la_pampa/mapbiomas_2019_thumb.png",
+        "source": "MapBiomas Amazonia Collection 6 / GEE",
+        "year": 2019,
+        "crs": "EPSG:32719",
+        "resolution": [
+          30.0,
+          -30.0
+        ],
+        "classes": {
+          "3": {
+            "name": "Forest formation",
+            "color": "#1f8d49",
+            "pixels": 679100,
+            "percent_valid": 48.2168
+          },
+          "6": {
+            "name": "Flooded forest",
+            "color": "#026975",
+            "pixels": 351836,
+            "percent_valid": 24.9807
+          },
+          "11": {
+            "name": "Wetland",
+            "color": "#519799",
+            "pixels": 16796,
+            "percent_valid": 1.1925
+          },
+          "15": {
+            "name": "Pasture",
+            "color": "#edde8e",
+            "pixels": 9480,
+            "percent_valid": 0.6731
+          },
+          "21": {
+            "name": "Mosaic of uses",
+            "color": "#ffefc3",
+            "pixels": 242717,
+            "percent_valid": 17.2332
+          },
+          "24": {
+            "name": "Urban area",
+            "color": "#d4271e",
+            "pixels": 1506,
+            "percent_valid": 0.1069
+          },
+          "25": {
+            "name": "Other non-vegetated area",
+            "color": "#db4d4f",
+            "pixels": 10886,
+            "percent_valid": 0.7729
+          },
+          "30": {
+            "name": "Mining",
+            "color": "#9c0027",
+            "pixels": 37148,
+            "percent_valid": 2.6375
+          },
+          "33": {
+            "name": "River, lake and ocean",
+            "color": "#2532e4",
+            "pixels": 58961,
+            "percent_valid": 4.1863
+          }
+        },
+        "ui_note": "Render legend in UI from classes. PNG contains raster colors only."
+      },
+      "2020": {
+        "type": "mapbiomas",
+        "title": "Land-cover map",
+        "subtitle": "MapBiomas / GEE classification · 2020",
+        "asset": "la_pampa/mapbiomas_2020.png",
+        "thumbnail": "la_pampa/mapbiomas_2020_thumb.png",
+        "source": "MapBiomas Amazonia Collection 6 / GEE",
+        "year": 2020,
+        "crs": "EPSG:32719",
+        "resolution": [
+          30.0,
+          -30.0
+        ],
+        "classes": {
+          "3": {
+            "name": "Forest formation",
+            "color": "#1f8d49",
+            "pixels": 687409,
+            "percent_valid": 48.8068
+          },
+          "6": {
+            "name": "Flooded forest",
+            "color": "#026975",
+            "pixels": 333369,
+            "percent_valid": 23.6695
+          },
+          "11": {
+            "name": "Wetland",
+            "color": "#519799",
+            "pixels": 23437,
+            "percent_valid": 1.6641
+          },
+          "15": {
+            "name": "Pasture",
+            "color": "#edde8e",
+            "pixels": 9191,
+            "percent_valid": 0.6526
+          },
+          "21": {
+            "name": "Mosaic of uses",
+            "color": "#ffefc3",
+            "pixels": 238147,
+            "percent_valid": 16.9087
+          },
+          "24": {
+            "name": "Urban area",
+            "color": "#d4271e",
+            "pixels": 1586,
+            "percent_valid": 0.1126
+          },
+          "25": {
+            "name": "Other non-vegetated area",
+            "color": "#db4d4f",
+            "pixels": 9710,
+            "percent_valid": 0.6894
+          },
+          "30": {
+            "name": "Mining",
+            "color": "#9c0027",
+            "pixels": 55612,
+            "percent_valid": 3.9485
+          },
+          "33": {
+            "name": "River, lake and ocean",
+            "color": "#2532e4",
+            "pixels": 49969,
+            "percent_valid": 3.5479
+          }
+        },
+        "ui_note": "Render legend in UI from classes. PNG contains raster colors only."
+      },
+      "2021": {
+        "type": "mapbiomas",
+        "title": "Land-cover map",
+        "subtitle": "MapBiomas / GEE classification · 2021",
+        "asset": "la_pampa/mapbiomas_2021.png",
+        "thumbnail": "la_pampa/mapbiomas_2021_thumb.png",
+        "source": "MapBiomas Amazonia Collection 6 / GEE",
+        "year": 2021,
+        "crs": "EPSG:32719",
+        "resolution": [
+          30.0,
+          -30.0
+        ],
+        "classes": {
+          "3": {
+            "name": "Forest formation",
+            "color": "#1f8d49",
+            "pixels": 716654,
+            "percent_valid": 50.8832
+          },
+          "6": {
+            "name": "Flooded forest",
+            "color": "#026975",
+            "pixels": 340310,
+            "percent_valid": 24.1624
+          },
+          "11": {
+            "name": "Wetland",
+            "color": "#519799",
+            "pixels": 10437,
+            "percent_valid": 0.741
+          },
+          "15": {
+            "name": "Pasture",
+            "color": "#edde8e",
+            "pixels": 9298,
+            "percent_valid": 0.6602
+          },
+          "21": {
+            "name": "Mosaic of uses",
+            "color": "#ffefc3",
+            "pixels": 218653,
+            "percent_valid": 15.5246
+          },
+          "24": {
+            "name": "Urban area",
+            "color": "#d4271e",
+            "pixels": 1721,
+            "percent_valid": 0.1222
+          },
+          "25": {
+            "name": "Other non-vegetated area",
+            "color": "#db4d4f",
+            "pixels": 11620,
+            "percent_valid": 0.825
+          },
+          "30": {
+            "name": "Mining",
+            "color": "#9c0027",
+            "pixels": 43826,
+            "percent_valid": 3.1117
+          },
+          "33": {
+            "name": "River, lake and ocean",
+            "color": "#2532e4",
+            "pixels": 55911,
+            "percent_valid": 3.9697
+          }
+        },
+        "ui_note": "Render legend in UI from classes. PNG contains raster colors only."
+      },
+      "2022": {
+        "type": "mapbiomas",
+        "title": "Land-cover map",
+        "subtitle": "MapBiomas / GEE classification · 2022",
+        "asset": "la_pampa/mapbiomas_2022.png",
+        "thumbnail": "la_pampa/mapbiomas_2022_thumb.png",
+        "source": "MapBiomas Amazonia Collection 6 / GEE",
+        "year": 2022,
+        "crs": "EPSG:32719",
+        "resolution": [
+          30.0,
+          -30.0
+        ],
+        "classes": {
+          "3": {
+            "name": "Forest formation",
+            "color": "#1f8d49",
+            "pixels": 647931,
+            "percent_valid": 46.0038
+          },
+          "6": {
+            "name": "Flooded forest",
+            "color": "#026975",
+            "pixels": 315131,
+            "percent_valid": 22.3746
+          },
+          "11": {
+            "name": "Wetland",
+            "color": "#519799",
+            "pixels": 9428,
+            "percent_valid": 0.6694
+          },
+          "15": {
+            "name": "Pasture",
+            "color": "#edde8e",
+            "pixels": 9271,
+            "percent_valid": 0.6583
+          },
+          "21": {
+            "name": "Mosaic of uses",
+            "color": "#ffefc3",
+            "pixels": 292265,
+            "percent_valid": 20.7511
+          },
+          "24": {
+            "name": "Urban area",
+            "color": "#d4271e",
+            "pixels": 1795,
+            "percent_valid": 0.1274
+          },
+          "25": {
+            "name": "Other non-vegetated area",
+            "color": "#db4d4f",
+            "pixels": 9265,
+            "percent_valid": 0.6578
+          },
+          "30": {
+            "name": "Mining",
+            "color": "#9c0027",
+            "pixels": 68672,
+            "percent_valid": 4.8758
+          },
+          "33": {
+            "name": "River, lake and ocean",
+            "color": "#2532e4",
+            "pixels": 54672,
+            "percent_valid": 3.8818
+          }
+        },
+        "ui_note": "Render legend in UI from classes. PNG contains raster colors only."
+      }
+    },
+    "damage_mask": {
+      "2018_2019": {
+        "type": "damage_mask",
+        "title": "Damage mask",
+        "subtitle": "Observed/derived damage · 2018 → 2019",
+        "asset": "la_pampa/damage_2018_2019.png",
+        "thumbnail": "la_pampa/damage_2018_2019_thumb.png",
+        "overlay_asset": "la_pampa/damage_2018_2019_overlay.png",
+        "source": "Derived binary mask",
+        "period": "2018 → 2019",
+        "start_year": 2018,
+        "end_year": 2019,
+        "crs": "EPSG:32719",
+        "resolution": [
+          10.0,
+          -10.0
+        ],
+        "legend": {
+          "0": {
+            "name": "Stable / non-damage",
+            "color": "#1f4d2e",
+            "pixels": 12665286
+          },
+          "1": {
+            "name": "Damage",
+            "color": "#ff2a2a",
+            "pixels": 603
+          },
+          "255": {
+            "name": "No data",
+            "color": "#ffffff",
+            "pixels": 0
+          }
+        },
+        "stats": {
+          "total_pixels": 12665889,
+          "valid_pixels": 12665889,
+          "damage_pixels": 603,
+          "background_pixels": 12665286,
+          "nodata_pixels": 0,
+          "damage_percent_valid": 0.0048,
+          "damage_hectares": 6.03,
+          "unexpected_values": []
+        },
+        "ui_note": "Render title and legend in UI. PNG contains clean mask only. Use overlay_asset for red transparent overlay mode."
+      },
+      "2019_2020": {
+        "type": "damage_mask",
+        "title": "Damage mask",
+        "subtitle": "Observed/derived damage · 2019 → 2020",
+        "asset": "la_pampa/damage_2019_2020.png",
+        "thumbnail": "la_pampa/damage_2019_2020_thumb.png",
+        "overlay_asset": "la_pampa/damage_2019_2020_overlay.png",
+        "source": "Derived binary mask",
+        "period": "2019 → 2020",
+        "start_year": 2019,
+        "end_year": 2020,
+        "crs": "EPSG:32719",
+        "resolution": [
+          10.0,
+          -10.0
+        ],
+        "legend": {
+          "0": {
+            "name": "Stable / non-damage",
+            "color": "#1f4d2e",
+            "pixels": 12664872
+          },
+          "1": {
+            "name": "Damage",
+            "color": "#ff2a2a",
+            "pixels": 1017
+          },
+          "255": {
+            "name": "No data",
+            "color": "#ffffff",
+            "pixels": 0
+          }
+        },
+        "stats": {
+          "total_pixels": 12665889,
+          "valid_pixels": 12665889,
+          "damage_pixels": 1017,
+          "background_pixels": 12664872,
+          "nodata_pixels": 0,
+          "damage_percent_valid": 0.008,
+          "damage_hectares": 10.17,
+          "unexpected_values": []
+        },
+        "ui_note": "Render title and legend in UI. PNG contains clean mask only. Use overlay_asset for red transparent overlay mode."
+      },
+      "2020_2021": {
+        "type": "damage_mask",
+        "title": "Damage mask",
+        "subtitle": "Observed/derived damage · 2020 → 2021",
+        "asset": "la_pampa/damage_2020_2021.png",
+        "thumbnail": "la_pampa/damage_2020_2021_thumb.png",
+        "overlay_asset": "la_pampa/damage_2020_2021_overlay.png",
+        "source": "Derived binary mask",
+        "period": "2020 → 2021",
+        "start_year": 2020,
+        "end_year": 2021,
+        "crs": "EPSG:32719",
+        "resolution": [
+          10.0,
+          -10.0
+        ],
+        "legend": {
+          "0": {
+            "name": "Stable / non-damage",
+            "color": "#1f4d2e",
+            "pixels": 12652272
+          },
+          "1": {
+            "name": "Damage",
+            "color": "#ff2a2a",
+            "pixels": 13617
+          },
+          "255": {
+            "name": "No data",
+            "color": "#ffffff",
+            "pixels": 0
+          }
+        },
+        "stats": {
+          "total_pixels": 12665889,
+          "valid_pixels": 12665889,
+          "damage_pixels": 13617,
+          "background_pixels": 12652272,
+          "nodata_pixels": 0,
+          "damage_percent_valid": 0.1075,
+          "damage_hectares": 136.17,
+          "unexpected_values": []
+        },
+        "ui_note": "Render title and legend in UI. PNG contains clean mask only. Use overlay_asset for red transparent overlay mode."
+      },
+      "2021_2022": {
+        "type": "damage_mask",
+        "title": "Damage mask",
+        "subtitle": "Observed/derived damage · 2021 → 2022",
+        "asset": "la_pampa/damage_2021_2022.png",
+        "thumbnail": "la_pampa/damage_2021_2022_thumb.png",
+        "overlay_asset": "la_pampa/damage_2021_2022_overlay.png",
+        "source": "Derived binary mask",
+        "period": "2021 → 2022",
+        "start_year": 2021,
+        "end_year": 2022,
+        "crs": "EPSG:32719",
+        "resolution": [
+          10.0,
+          -10.0
+        ],
+        "legend": {
+          "0": {
+            "name": "Stable / non-damage",
+            "color": "#1f4d2e",
+            "pixels": 12603690
+          },
+          "1": {
+            "name": "Damage",
+            "color": "#ff2a2a",
+            "pixels": 62199
+          },
+          "255": {
+            "name": "No data",
+            "color": "#ffffff",
+            "pixels": 0
+          }
+        },
+        "stats": {
+          "total_pixels": 12665889,
+          "valid_pixels": 12665889,
+          "damage_pixels": 62199,
+          "background_pixels": 12603690,
+          "nodata_pixels": 0,
+          "damage_percent_valid": 0.4911,
+          "damage_hectares": 621.99,
+          "unexpected_values": []
+        },
+        "ui_note": "Render title and legend in UI. PNG contains clean mask only. Use overlay_asset for red transparent overlay mode."
+      }
+    },
+    "prediction": {}
+  },
+  "data_status": {
+    "sentinel2": true,
+    "mapbiomas": true,
+    "damage_mask": true,
+    "prediction": false,
+    "context_layers": false,
+    "backend": false
+  },
+  "frontend_notes": [
+    "Assets are clean images with no baked-in titles, legends, axes, or margins.",
+    "Render titles, legends, badges, stats, and report text in the frontend from metadata.",
+    "Prediction/backend/action-layer outputs are placeholders unless explicitly present."
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "product": "ForestWorld",
+  "tagline": "Predictive forest-risk intelligence",
+  "data_mode": "static_demo_assets",
+  "description": "Clean static web assets generated from Sentinel-2, MapBiomas/GEE, and damage mask GeoTIFFs. Images contain pixels only; all titles, legends, and statistics are stored in metadata.",
+  "uploaded_demo_aoi": "boca_manu",
+  "aois": [
+    {
+      "id": "boca_manu",
+      "name": "Boca Manu",
+      "region": "Madre de Dios, Peru",
+      "coordinates": {
+        "lat": -12.276,
+        "lon": -70.901
+      },
+      "status": "demo_loaded",
+      "uploaded_to_prototype": true,
+      "available_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "available_periods": [
+        "2018 → 2019",
+        "2019 → 2020",
+        "2020 → 2021",
+        "2021 → 2022"
+      ],
+      "data_status": {
+        "sentinel2": true,
+        "mapbiomas": true,
+        "damage_mask": true,
+        "prediction": false,
+        "context_layers": false,
+        "backend": false
+      },
+      "metadata": "boca_manu/metadata.json"
+    },
+    {
+      "id": "la_pampa",
+      "name": "La Pampa",
+      "region": "Madre de Dios, Peru",
+      "coordinates": {
+        "lat": -12.866,
+        "lon": -69.665
+      },
+      "status": "demo_loaded",
+      "uploaded_to_prototype": true,
+      "available_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "available_periods": [
+        "2018 → 2019",
+        "2019 → 2020",
+        "2020 → 2021",
+        "2021 → 2022"
+      ],
+      "data_status": {
+        "sentinel2": true,
+        "mapbiomas": true,
+        "damage_mask": true,
+        "prediction": false,
+        "context_layers": false,
+        "backend": false
+      },
+      "metadata": "la_pampa/metadata.json"
+    },
+    {
+      "id": "masisea",
+      "name": "Masisea",
+      "region": "Ucayali, Peru",
+      "coordinates": {
+        "lat": -8.282,
+        "lon": -74.293
+      },
+      "status": "demo_loaded",
+      "uploaded_to_prototype": true,
+      "available_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "available_periods": [
+        "2018 → 2019",
+        "2019 → 2020",
+        "2020 → 2021",
+        "2021 → 2022"
+      ],
+      "data_status": {
+        "sentinel2": true,
+        "mapbiomas": true,
+        "damage_mask": true,
+        "prediction": false,
+        "context_layers": false,
+        "backend": false
+      },
+      "metadata": "masisea/metadata.json"
+    },
+    {
+      "id": "chipiar",
+      "name": "Chipiar / Padre Márquez",
+      "region": "Ucayali–Loreto frontier, Peru",
+      "coordinates": {
+        "lat": -8.075,
+        "lon": -74.25
+      },
+      "status": "demo_loaded",
+      "uploaded_to_prototype": true,
+      "available_years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "available_periods": [
+        "2018 → 2019",
+        "2019 → 2020",
+        "2020 → 2021",
+        "2021 → 2022"
+      ],
+      "data_status": {
+        "sentinel2": true,
+        "mapbiomas": true,
+        "damage_mask": true,
+        "prediction": false,
+        "context_layers": false,
+        "backend": false
+      },
+      "metadata": "chipiar/metadata.json"
+    }
+  ]
+}
