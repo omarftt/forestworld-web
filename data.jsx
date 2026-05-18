@@ -165,6 +165,270 @@ function totalHa(cases) {
   return cases.reduce((s, c) => s + (typeof c.area_ha === 'number' ? c.area_ha : 0), 0);
 }
 
+// ============================================================
+// Generación de reporte PDF (jsPDF, formato oficio fiscal)
+// ============================================================
+
+const PDF_BRAND = '#1f5c3c';     // forest-2
+const PDF_INK   = '#1a221d';     // ink
+const PDF_INK_2 = '#3b463f';     // ink-2
+const PDF_INK_3 = '#6d7a72';     // ink-3
+const PDF_LINE  = '#d3d7cc';     // line-2
+const PDF_RED   = '#a83a2c';
+const PDF_AMBER = '#a06f1c';
+
+function _today() {
+  const d = new Date();
+  return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
+}
+
+function _hexToRgb(hex) {
+  const h = hex.replace('#', '');
+  return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)];
+}
+
+function _priorityColor(p) {
+  if (p === 'Alta')  return PDF_RED;
+  if (p === 'Media') return PDF_AMBER;
+  return PDF_INK_3;
+}
+
+// Renderiza un párrafo con wrap automático y devuelve la nueva y.
+function _drawWrapped(doc, text, x, y, maxWidth, opts = {}) {
+  const lineHeight = opts.lineHeight || 5;
+  const lines = doc.splitTextToSize(text, maxWidth);
+  for (const line of lines) {
+    doc.text(line, x, y);
+    y += lineHeight;
+  }
+  return y;
+}
+
+// Si quedan menos de `need` mm en la página, agrega una nueva.
+function _ensureSpace(doc, y, need, marginTop = 20) {
+  const pageH = doc.internal.pageSize.getHeight();
+  if (y + need > pageH - 20) {
+    doc.addPage();
+    return marginTop;
+  }
+  return y;
+}
+
+function _drawHeader(doc, aoi, pair) {
+  const pageW = doc.internal.pageSize.getWidth();
+
+  // Línea de marca
+  doc.setDrawColor(..._hexToRgb(PDF_BRAND));
+  doc.setLineWidth(0.6);
+  doc.line(20, 18, pageW - 20, 18);
+
+  // Título
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(18);
+  doc.setTextColor(..._hexToRgb(PDF_BRAND));
+  doc.text('ForestWorld — Alerta de Riesgo de Deforestación', 20, 28);
+
+  // Sub-bloque de metadatos
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10.5);
+  doc.setTextColor(..._hexToRgb(PDF_INK_2));
+  let y = 38;
+  doc.text(`Área de interés: ${aoi.name}`, 20, y); y += 5.5;
+  doc.text(`Región: ${aoi.region}`, 20, y); y += 5.5;
+  doc.text(`Período analizado: ${pair ? pair.replace('_', ' → ') : '—'}`, 20, y); y += 5.5;
+  doc.text(`Fecha de emisión: ${_today()}`, 20, y); y += 5.5;
+  return y + 2;
+}
+
+function _drawSummary(doc, aoi, cases, y) {
+  const pageW = doc.internal.pageSize.getWidth();
+  doc.setDrawColor(..._hexToRgb(PDF_LINE));
+  doc.setLineWidth(0.3);
+  doc.line(20, y, pageW - 20, y);
+  y += 7;
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(12);
+  doc.setTextColor(..._hexToRgb(PDF_INK));
+  doc.text('Resumen', 20, y); y += 6;
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10.5);
+  doc.setTextColor(..._hexToRgb(PDF_INK_2));
+  doc.text(`• Tipo de frontera: ${driverEs(aoi.driver)}`, 20, y); y += 5;
+  doc.text(`• Hectáreas en riesgo (total): ${totalHa(cases).toFixed(1)} ha`, 20, y); y += 5;
+  doc.text(`• Casos priorizados: ${cases.length}`, 20, y); y += 5;
+  if (cases.length > 0) {
+    doc.text(`• Responsable principal (caso 1): ${cases[0].stakeholder || '—'}`, 20, y); y += 5;
+  }
+  return y + 3;
+}
+
+function _drawCase(doc, c, idx, y) {
+  const pageW = doc.internal.pageSize.getWidth();
+  const innerW = pageW - 40;
+
+  y = _ensureSpace(doc, y, 80);
+
+  // Separador
+  doc.setDrawColor(..._hexToRgb(PDF_LINE));
+  doc.setLineWidth(0.3);
+  doc.line(20, y, pageW - 20, y);
+  y += 7;
+
+  // Encabezado del caso
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(13);
+  doc.setTextColor(..._hexToRgb(PDF_INK));
+  doc.text(`CASO ${c.rank}`, 20, y);
+
+  // Pill de prioridad (a la derecha)
+  const pColor = _priorityColor(c.priority);
+  doc.setFontSize(10);
+  doc.setTextColor(..._hexToRgb(pColor));
+  doc.text(`Prioridad ${c.priority.toUpperCase()}`, pageW - 20, y, { align: 'right' });
+  y += 7;
+
+  // "Para: ..."
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10.5);
+  doc.setTextColor(..._hexToRgb(PDF_INK_2));
+  doc.text(`Para: ${c.stakeholder || '—'}`, 20, y); y += 6;
+
+  // Sub-titulo "Descripción del caso"
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
+  doc.setTextColor(..._hexToRgb(PDF_INK));
+  doc.text('Descripción del caso', 20, y); y += 5.5;
+
+  // Tabla key/value
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.setTextColor(..._hexToRgb(PDF_INK_2));
+  const kvs = [
+    ['Área en riesgo',                     `${(c.area_ha || 0).toFixed(1)} hectáreas`],
+    ['Coordenadas GPS (centroide)',        `Lat ${c.centroid_lat}, Lon ${c.centroid_lon}`],
+    ['Plazo sugerido de intervención',     formatSpanishDate(c.suggested_deadline)],
+    ['Área Natural Protegida',             c.in_anp && c.anp_name ? c.anp_name : '—'],
+    ['Territorio indígena',                c.in_territorio_indigena && c.territorio_name ? c.territorio_name : '—'],
+    ['Concesión minera',                   c.concesion_minera
+                                              ? `${c.concesion_minera}${c.concesion_titular ? ' — ' + c.concesion_titular : ''}${c.concesion_estado ? ' (' + c.concesion_estado.toLowerCase() + ')' : ''}`
+                                              : '—'],
+    ['Concesión forestal',                 c.concesion_forestal || '—'],
+    ['Driver de deforestación',            driverEs(c.driver)],
+    ['Distancia a cuerpo de agua',         typeof c.dist_rio_m === 'number' ? `${Math.round(c.dist_rio_m)} m` : '—'],
+    ['Distancia a carretera',              typeof c.dist_carretera_m === 'number' ? `${Math.round(c.dist_carretera_m)} m` : '—'],
+  ];
+  const keyW = 60;
+  for (const [k, v] of kvs) {
+    y = _ensureSpace(doc, y, 6);
+    doc.setFont('helvetica', 'bold');
+    doc.text(k + ':', 20, y);
+    doc.setFont('helvetica', 'normal');
+    const valueText = doc.splitTextToSize(String(v), innerW - keyW);
+    for (let i = 0; i < valueText.length; i++) {
+      if (i > 0) y += 5;
+      doc.text(valueText[i], 20 + keyW, y);
+    }
+    y += 5;
+  }
+  y += 2;
+
+  // Justificación
+  const lines = caseJustifications(c);
+  const strap = c.priority === 'Alta' ? '¿Por qué es prioridad alta?' :
+                c.priority === 'Media' ? '¿Por qué es prioridad media?' :
+                'Observaciones';
+
+  y = _ensureSpace(doc, y, 12 + lines.length * 5);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
+  doc.setTextColor(..._hexToRgb(PDF_INK));
+  doc.text(strap, 20, y); y += 5.5;
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.setTextColor(..._hexToRgb(PDF_INK_2));
+  for (const line of lines) {
+    y = _ensureSpace(doc, y, 5);
+    doc.text(`  • ${line}`, 20, y);
+    y += 5;
+  }
+  return y + 4;
+}
+
+function _drawMethodology(doc, y) {
+  const pageW = doc.internal.pageSize.getWidth();
+  const innerW = pageW - 40;
+  y = _ensureSpace(doc, y, 50);
+
+  doc.setDrawColor(..._hexToRgb(PDF_LINE));
+  doc.setLineWidth(0.3);
+  doc.line(20, y, pageW - 20, y);
+  y += 7;
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(12);
+  doc.setTextColor(..._hexToRgb(PDF_INK));
+  doc.text('Metodología', 20, y); y += 6;
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.setTextColor(..._hexToRgb(PDF_INK_2));
+  const body = (
+    'Predicción generada por ForestWorld usando imágenes Sentinel-2 (Microsoft Planetary Computer) procesadas con Prithvi-EO-2.0 (NASA/IBM). ' +
+    'Las zonas de riesgo se polygonizan con un umbral de detección de 0.30 y se filtran descartando polígonos menores a 2 hectáreas. ' +
+    'A cada polígono se le asigna prioridad (Alta / Media / Baja) cruzándolo con áreas naturales protegidas (SERNANP), territorios indígenas (RAISG), concesiones mineras (INGEMMET) y forestales (SERFOR), además de su cercanía a ríos (HydroSHEDS) y carreteras (OpenStreetMap). El plazo sugerido es de 7 días.'
+  );
+  y = _drawWrapped(doc, body, 20, y, innerW, { lineHeight: 5 });
+  return y;
+}
+
+function _drawFooter(doc) {
+  const total = doc.internal.getNumberOfPages();
+  const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
+  for (let i = 1; i <= total; i++) {
+    doc.setPage(i);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8.5);
+    doc.setTextColor(..._hexToRgb(PDF_INK_3));
+    doc.text('ForestWorld · Inteligencia predictiva de riesgo forestal', 20, pageH - 10);
+    doc.text(`Página ${i} de ${total}`, pageW - 20, pageH - 10, { align: 'right' });
+  }
+}
+
+function generateReportPDF(aoi, pair) {
+  if (!window.jspdf || !window.jspdf.jsPDF) {
+    alert('No se pudo cargar el generador de PDF. Revisa la conexión a internet.');
+    return;
+  }
+  const cases = (aoi.ranking && pair && aoi.ranking[pair]) || [];
+  const doc = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4' });
+
+  let y = _drawHeader(doc, aoi, pair);
+  y = _drawSummary(doc, aoi, cases, y);
+
+  if (cases.length === 0) {
+    y = _ensureSpace(doc, y, 20);
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(11);
+    doc.setTextColor(..._hexToRgb(PDF_INK_3));
+    doc.text('Sin casos priorizados para este período.', 20, y);
+    y += 8;
+  } else {
+    for (let i = 0; i < cases.length; i++) {
+      y = _drawCase(doc, cases[i], i, y);
+    }
+  }
+
+  y = _drawMethodology(doc, y);
+  _drawFooter(doc);
+
+  const slug = `${aoi.id}_${(pair || 'reporte').replace(/[^a-z0-9_]/gi, '_')}.pdf`;
+  doc.save(`forestworld_${slug}`);
+}
+
 // ---------- Iconos ----------
 const Icon = {
   logo: (p) => (
@@ -217,4 +481,5 @@ Object.assign(window, {
   cleanAnpName,
   caseJustifications,
   totalHa,
+  generateReportPDF,
 });

@@ -334,15 +334,15 @@ function CasePage({ aoi, onBack }) {
       tab === 'satellite'  ? `${satYear}` :
       null;
 
-  // El período activo para el panel "Resumen del caso".
-  // Si el usuario está en la pestaña de daño, usamos ese par; si no, el último
-  // par disponible (o el primero de ranking si solo hay uno).
-  const briefPair = (
-    tab === 'damage' && dmgPair ? dmgPair :
-    (aoi.damage && aoi.damage[aoi.damage.length - 1]) ||
-    Object.keys(aoi.ranking || {})[0] ||
-    null
-  );
+  // El panel "Resumen del caso" siempre apunta al período con ranking más
+  // reciente, independiente de qué pestaña esté abierta o qué año esté
+  // seleccionado en el selector. Así el panel se mantiene estable cuando el
+  // usuario navega entre Cobertura / Daño / Satélite / Predicción.
+  const briefPair = React.useMemo(() => {
+    const pairs = Object.keys(aoi.ranking || {}).sort();
+    if (pairs.length > 0) return pairs[pairs.length - 1];
+    return (aoi.damage && aoi.damage[aoi.damage.length - 1]) || null;
+  }, [aoi.ranking, aoi.damage]);
 
   return (
     <div>
@@ -366,7 +366,11 @@ function CasePage({ aoi, onBack }) {
               )}
             </div>
             <div className="row gap-8" style={{ flexShrink: 0 }}>
-              <button className="btn btn-primary"><Icon.download />Exportar Reporte PDF</button>
+              <button className="btn btn-primary"
+                onClick={() => generateReportPDF(aoi, briefPair)}
+                title={`Generar PDF del reporte para ${aoi.name}`}>
+                <Icon.download />Exportar Reporte PDF
+              </button>
             </div>
           </div>
         </div>
@@ -470,7 +474,7 @@ function EvidenceArea({ tab, aoi, mbYear, setMbYear, dmgIdx, setDmgIdx, satYear,
           <StageCorner position="br"><DamageFloatingLegend /></StageCorner>
           <ScaleCorner />
         </ImageStage>
-        <CaptionLine left="Máscara binaria · 0 = estable, 1 = daño. Derivada de transiciones de cobertura." />
+        <CaptionLine left="Las zonas en rojo señalan pérdida de bosque detectada entre los dos años seleccionados. El verde oscuro indica bosque que se mantuvo sin cambios. Suele haber poca pérdida en proporción al área total, pero cada zona roja representa hectáreas en riesgo." />
       </div>
     );
   }
