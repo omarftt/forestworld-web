@@ -45,16 +45,21 @@ const TABS = [
   { id: 'prediction', label: 'Predicción',          short: 'Predicción', sub: 'Probabilidad de daño futuro' },
 ];
 
-// ---------- Leyenda MapBiomas (nombres traducidos) ----------
+// ---------- Leyenda MapBiomas (Amazonía Col. 6, traducida) ----------
+// Solo las clases que realmente aparecen en los rásters de los 4 AOIs.
+// Colores tomados de las exportaciones de GEE (ver metadata.json de cada AOI).
+// Orden temático: bosque y agua natural → usos mixtos → drivers de deforestación.
 const MAPBIOMAS_CLASSES = [
-  { code: 3,  name: 'Formación de bosque',     color: '#1f8d49' },
-  { code: 6,  name: 'Bosque inundado',         color: '#007785' },
-  { code: 11, name: 'Humedal',                 color: '#45c2a5' },
-  { code: 15, name: 'Pasto',                   color: '#edde8e' },
-  { code: 21, name: 'Mosaico de usos',         color: '#f5d76e' },
-  { code: 24, name: 'Área urbana',             color: '#af2a2a' },
-  { code: 25, name: 'Suelo desnudo',           color: '#d4ac3a' },
-  { code: 33, name: 'Río, lago u océano',      color: '#2c6bd1' },
+  { code: 3,  name: 'Formación de bosque',  color: '#1f8d49' },
+  { code: 6,  name: 'Bosque inundado',      color: '#026975' },
+  { code: 11, name: 'Humedal',              color: '#519799' },
+  { code: 21, name: 'Mosaico de usos',      color: '#ffefc3' },
+  { code: 15, name: 'Pasto',                color: '#edde8e' },
+  { code: 18, name: 'Agricultura',          color: '#e974ed' },
+  { code: 30, name: 'Minería',              color: '#9c0027' },
+  { code: 25, name: 'Suelo desnudo',        color: '#db4d4f' },
+  { code: 24, name: 'Área urbana',          color: '#d4271e' },
+  { code: 33, name: 'Río, lago u océano',   color: '#2532e4' },
 ];
 
 // ---------- Estado del catálogo ----------
