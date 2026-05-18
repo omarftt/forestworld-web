@@ -4,7 +4,7 @@
     {
       "id": "boca_manu",
       "name": "Boca Manu",
-      "region": "Madre de Dios, Peru",
+      "region": "Madre de Dios, Perú",
       "driver": "mixed_frontier",
       "satellite": [
         2018,
@@ -145,7 +145,7 @@
     {
       "id": "la_pampa",
       "name": "La Pampa",
-      "region": "Madre de Dios, Peru",
+      "region": "Madre de Dios, Perú",
       "driver": "alluvial_mining",
       "satellite": [
         2018,
@@ -286,7 +286,7 @@
     {
       "id": "masisea",
       "name": "Masisea",
-      "region": "Ucayali, Peru",
+      "region": "Ucayali, Perú",
       "driver": "mennonite_agriculture",
       "satellite": [
         2018,
@@ -427,7 +427,7 @@
     {
       "id": "chipiar",
       "name": "Chipiar / Padre Márquez",
-      "region": "Ucayali–Loreto frontier, Peru",
+      "region": "Frontera Ucayali–Loreto, Perú",
       "driver": "mennonite_agriculture",
       "satellite": [
         2018,

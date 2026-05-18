@@ -17,19 +17,14 @@ function TopBar({ onView, view }) {
           {[
             { id: 'selector', label: 'Mapa' },
             { id: 'selector', label: 'Áreas' },
-            { id: 'reports',  label: 'Reportes', disabled: true },
           ].map((n, i) => (
-            <button key={i} className={`navlink ${(view === n.id || (i === 1 && view === 'selector')) ? 'active' : ''} ${n.disabled ? 'disabled' : ''}`}
-              onClick={() => !n.disabled && onView(n.id)}>
+            <button key={i} className={`navlink ${(view === n.id || (i === 1 && view === 'selector')) ? 'active' : ''}`}
+              onClick={() => onView(n.id)}>
               {n.label}
-              {n.disabled && <span style={{ marginLeft: 6, fontSize: 9, color: 'var(--ink-4)' }}>próximamente</span>}
             </button>
           ))}
         </nav>
         <div className="grow"></div>
-        <button className="btn btn-sm" disabled style={{ opacity: 0.55, cursor: 'not-allowed' }}>
-          <Icon.download />Exportar reporte
-        </button>
       </div>
     </div>
   );
@@ -361,26 +356,17 @@ function CasePage({ aoi, onBack }) {
             <span className="t-sm fw-500 nowrap">{aoi.name}</span>
           </div>
           <div className="row between gap-20" style={{ flexWrap: 'wrap' }}>
-            <div className="col gap-10" style={{ minWidth: 0 }}>
-              <div className="row gap-14" style={{ flexWrap: 'wrap', alignItems: 'baseline' }}>
-                <h1 style={{ margin: 0, fontSize: 30, fontWeight: 600, letterSpacing: '-0.015em', lineHeight: 1.1 }}>{aoi.name}</h1>
-                <span className="muted-2 t-md nowrap">{aoi.region}</span>
-              </div>
-              <div className="row gap-12" style={{ flexWrap: 'wrap', alignItems: 'center' }}>
-                <span className="badge badge-ok" style={{ height: 24 }}>
-                  <span className="dot"></span>Evidencia cargada
+            <div className="col" style={{ minWidth: 0, gap: 6 }}>
+              <h1 style={{ margin: 0, fontSize: 32, fontWeight: 600, letterSpacing: '-0.015em', lineHeight: 1.1 }}>{aoi.name}</h1>
+              <span className="muted-2 t-md">{aoi.region}</span>
+              {periodLabel && (
+                <span className="t-sm muted nowrap" style={{ marginTop: 6 }}>
+                  Período seleccionado <span className="mono ink" style={{ fontWeight: 500 }}>{periodLabel}</span>
                 </span>
-                {periodLabel && (
-                  <>
-                    <span className="muted-2" style={{ opacity: 0.5 }}>·</span>
-                    <span className="t-sm muted nowrap">Período seleccionado <span className="mono ink" style={{ fontWeight: 500 }}>{periodLabel}</span></span>
-                  </>
-                )}
-              </div>
+              )}
             </div>
             <div className="row gap-8" style={{ flexShrink: 0 }}>
-              <button className="btn"><Icon.download />Exportar evidencia</button>
-              <button className="btn btn-primary" onClick={() => setBriefCollapsed(false)}>Abrir reporte</button>
+              <button className="btn btn-primary"><Icon.download />Exportar Reporte PDF</button>
             </div>
           </div>
         </div>
@@ -452,10 +438,7 @@ function EvidenceArea({ tab, aoi, mbYear, setMbYear, dmgIdx, setDmgIdx, satYear,
           <StageCorner position="br"><MapBiomasFloatingLegend /></StageCorner>
           <ScaleCorner />
         </ImageStage>
-        <CaptionLine
-          left="MapBiomas Amazonía Colección 6 · 30 m, remuestreado para visualización"
-          right={paths.mapbiomas(mbYear)}
-        />
+        <CaptionLine left="MapBiomas Amazonía Colección 6 · 30 m, remuestreado para visualización" />
       </div>
     );
   }
@@ -487,10 +470,7 @@ function EvidenceArea({ tab, aoi, mbYear, setMbYear, dmgIdx, setDmgIdx, satYear,
           <StageCorner position="br"><DamageFloatingLegend /></StageCorner>
           <ScaleCorner />
         </ImageStage>
-        <CaptionLine
-          left="Máscara binaria · 0 = estable, 1 = daño. Derivada de transiciones de cobertura."
-          right={pair ? paths.damage(pair) : ''}
-        />
+        <CaptionLine left="Máscara binaria · 0 = estable, 1 = daño. Derivada de transiciones de cobertura." />
       </div>
     );
   }
@@ -517,10 +497,7 @@ function EvidenceArea({ tab, aoi, mbYear, setMbYear, dmgIdx, setDmgIdx, satYear,
                style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block' }} />
           <ScaleCorner />
         </ImageStage>
-        <CaptionLine
-          left="Sentinel-2 L2A · 10 m, compuesto RGB con estiramiento por percentil"
-          right={paths.satellite(satYear)}
-        />
+        <CaptionLine left="Sentinel-2 L2A · 10 m, compuesto RGB con estiramiento por percentil" />
       </div>
     );
   }
@@ -542,7 +519,7 @@ function CaptionLine({ left, right }) {
   return (
     <div className="row between gap-12" style={{ fontSize: 11.5, color: 'var(--ink-3)', padding: '0 2px' }}>
       <span>{left}</span>
-      <span className="mono dim" style={{ fontSize: 10.5 }}>{right}</span>
+      {right && <span className="mono dim" style={{ fontSize: 10.5 }}>{right}</span>}
     </div>
   );
 }
