@@ -331,9 +331,10 @@ const CASE_TABS = [
 
 function pathFor(aoiId) {
   return {
-    satellite: (y)         => `web_assets/${aoiId}/sentinel_${y}.png`,
-    mapbiomas: (y)         => `web_assets/${aoiId}/mapbiomas_${y}.png`,
-    damage:    (pair)      => `web_assets/${aoiId}/damage_${pair}.png`,
+    satellite:  (y)    => `web_assets/${aoiId}/sentinel_${y}.png`,
+    mapbiomas:  (y)    => `web_assets/${aoiId}/mapbiomas_${y}.png`,
+    damage:     (pair) => `web_assets/${aoiId}/damage_${pair}.png`,
+    prediction: (pair) => `web_assets/${aoiId}/prediction_${pair}.png`,
   };
 }
 
@@ -524,12 +525,30 @@ function EvidenceArea({ tab, aoi, mbYear, setMbYear, dmgIdx, setDmgIdx, satYear,
   }
 
   if (tab === 'prediction') {
+    const pairs = aoi.prediction || [];
+    if (pairs.length === 0) {
+      return (
+        <EmptyState
+          tone="pending"
+          title="Predicción próximamente"
+          body="Cuando el modelo esté conectado, esta vista mostrará el ráster de probabilidad de daño para los próximos 6 a 12 meses sobre el área seleccionada."
+        />
+      );
+    }
+    const pair = pairs[0];
     return (
-      <EmptyState
-        tone="pending"
-        title="Predicción próximamente"
-        body="Cuando el modelo esté conectado, esta vista mostrará el ráster de probabilidad de daño para los próximos 6 a 12 meses sobre el área seleccionada."
-      />
+      <div className="col gap-16">
+        <ViewerHeader
+          title="Predicción de pérdida de bosque"
+          subtitle={`Probabilidad de daño · ${pair.replace('_', ' → ')}`}
+        />
+        <ImageStage>
+          <img src={paths.prediction(pair)} alt={`Predicción · ${pair}`}
+               style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block' }} />
+          <ScaleCorner />
+        </ImageStage>
+        <CaptionLine left="Las zonas más rojas indican mayor probabilidad de pérdida de bosque para el próximo año. Las zonas más claras son áreas con menor riesgo." />
+      </div>
     );
   }
 

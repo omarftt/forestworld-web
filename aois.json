@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-18T00:33:23.781299Z",
+  "generated_at": "2026-05-18T03:34:05.010670Z",
   "aois": [
     {
       "id": "boca_manu",
@@ -29,10 +29,10 @@
         "2021_2022"
       ],
       "prediction": [
-        "2021_2022"
+        "2022_2023"
       ],
       "ranking": {
-        "2021_2022": [
+        "2022_2023": [
           {
             "rank": 1,
             "area_ha": 8.0,
@@ -52,7 +52,7 @@
             "driver": "mixed_frontier",
             "stakeholder": "SERNANP",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/boca_manu_2021_2022/oficio_1.docx"
+            "oficio_path": "data/output/boca_manu_2022_2023/oficio_1.docx"
           },
           {
             "rank": 2,
@@ -73,7 +73,7 @@
             "driver": "mixed_frontier",
             "stakeholder": "SERNANP",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/boca_manu_2021_2022/oficio_2.docx"
+            "oficio_path": "data/output/boca_manu_2022_2023/oficio_2.docx"
           },
           {
             "rank": 3,
@@ -94,7 +94,7 @@
             "driver": "mixed_frontier",
             "stakeholder": "SERNANP",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/boca_manu_2021_2022/oficio_3.docx"
+            "oficio_path": "data/output/boca_manu_2022_2023/oficio_3.docx"
           },
           {
             "rank": 4,
@@ -115,7 +115,7 @@
             "driver": "mixed_frontier",
             "stakeholder": "SERNANP",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/boca_manu_2021_2022/oficio_4.docx"
+            "oficio_path": "data/output/boca_manu_2022_2023/oficio_4.docx"
           },
           {
             "rank": 5,
@@ -136,7 +136,7 @@
             "driver": "mixed_frontier",
             "stakeholder": "SERNANP",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/boca_manu_2021_2022/oficio_5.docx"
+            "oficio_path": "data/output/boca_manu_2022_2023/oficio_5.docx"
           }
         ]
       },
@@ -170,10 +170,10 @@
         "2021_2022"
       ],
       "prediction": [
-        "2021_2022"
+        "2022_2023"
       ],
       "ranking": {
-        "2021_2022": [
+        "2022_2023": [
           {
             "rank": 1,
             "area_ha": 21.9,
@@ -193,7 +193,7 @@
             "driver": "alluvial_mining",
             "stakeholder": "FEMA Madre de Dios + DREM + SERNANP",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/la_pampa_2021_2022/oficio_1.docx"
+            "oficio_path": "data/output/la_pampa_2022_2023/oficio_1.docx"
           },
           {
             "rank": 2,
@@ -214,7 +214,7 @@
             "driver": "alluvial_mining",
             "stakeholder": "FEMA Madre de Dios + DREM + SERNANP",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/la_pampa_2021_2022/oficio_2.docx"
+            "oficio_path": "data/output/la_pampa_2022_2023/oficio_2.docx"
           },
           {
             "rank": 3,
@@ -235,12 +235,12 @@
             "driver": "alluvial_mining",
             "stakeholder": "FEMA Madre de Dios + DREM",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/la_pampa_2021_2022/oficio_3.docx"
+            "oficio_path": "data/output/la_pampa_2022_2023/oficio_3.docx"
           },
           {
             "rank": 4,
             "area_ha": 16.0,
-            "priority": "Alta",
+            "priority": "Media",
             "centroid_lat": -12.661336,
             "centroid_lon": -69.556163,
             "in_anp": false,
@@ -256,12 +256,12 @@
             "driver": "alluvial_mining",
             "stakeholder": "FEMA Madre de Dios + DREM",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/la_pampa_2021_2022/oficio_4.docx"
+            "oficio_path": "data/output/la_pampa_2022_2023/oficio_4.docx"
           },
           {
             "rank": 5,
             "area_ha": 14.0,
-            "priority": "Alta",
+            "priority": "Media",
             "centroid_lat": -12.801061,
             "centroid_lon": -69.505838,
             "in_anp": true,
@@ -277,7 +277,7 @@
             "driver": "alluvial_mining",
             "stakeholder": "FEMA Madre de Dios + DREM + SERNANP",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/la_pampa_2021_2022/oficio_5.docx"
+            "oficio_path": "data/output/la_pampa_2022_2023/oficio_5.docx"
           }
         ]
       },
@@ -311,10 +311,10 @@
         "2021_2022"
       ],
       "prediction": [
-        "2021_2022"
+        "2022_2023"
       ],
       "ranking": {
-        "2021_2022": [
+        "2022_2023": [
           {
             "rank": 1,
             "area_ha": 125.3,
@@ -334,7 +334,7 @@
             "driver": "mennonite_agriculture",
             "stakeholder": "SERFOR + OEFA",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/masisea_2021_2022/oficio_1.docx"
+            "oficio_path": "data/output/masisea_2022_2023/oficio_1.docx"
           },
           {
             "rank": 2,
@@ -355,7 +355,7 @@
             "driver": "mennonite_agriculture",
             "stakeholder": "SERFOR + OEFA",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/masisea_2021_2022/oficio_2.docx"
+            "oficio_path": "data/output/masisea_2022_2023/oficio_2.docx"
           },
           {
             "rank": 3,
@@ -376,7 +376,7 @@
             "driver": "mennonite_agriculture",
             "stakeholder": "SERFOR + OEFA",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/masisea_2021_2022/oficio_3.docx"
+            "oficio_path": "data/output/masisea_2022_2023/oficio_3.docx"
           },
           {
             "rank": 4,
@@ -397,12 +397,12 @@
             "driver": "mennonite_agriculture",
             "stakeholder": "SERFOR + OEFA",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/masisea_2021_2022/oficio_4.docx"
+            "oficio_path": "data/output/masisea_2022_2023/oficio_4.docx"
           },
           {
             "rank": 5,
             "area_ha": 25.4,
-            "priority": "Alta",
+            "priority": "Media",
             "centroid_lat": -8.66488,
             "centroid_lon": -74.32372,
             "in_anp": false,
@@ -418,7 +418,7 @@
             "driver": "mennonite_agriculture",
             "stakeholder": "SERFOR + OEFA",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/masisea_2021_2022/oficio_5.docx"
+            "oficio_path": "data/output/masisea_2022_2023/oficio_5.docx"
           }
         ]
       },
@@ -452,10 +452,10 @@
         "2021_2022"
       ],
       "prediction": [
-        "2021_2022"
+        "2022_2023"
       ],
       "ranking": {
-        "2021_2022": [
+        "2022_2023": [
           {
             "rank": 1,
             "area_ha": 28.9,
@@ -475,7 +475,7 @@
             "driver": "mennonite_agriculture",
             "stakeholder": "SERFOR + OEFA",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/chipiar_2021_2022/oficio_1.docx"
+            "oficio_path": "data/output/chipiar_2022_2023/oficio_1.docx"
           },
           {
             "rank": 2,
@@ -496,7 +496,7 @@
             "driver": "mennonite_agriculture",
             "stakeholder": "SERFOR + OEFA",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/chipiar_2021_2022/oficio_2.docx"
+            "oficio_path": "data/output/chipiar_2022_2023/oficio_2.docx"
           },
           {
             "rank": 3,
@@ -517,7 +517,7 @@
             "driver": "mennonite_agriculture",
             "stakeholder": "SERNANP",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/chipiar_2021_2022/oficio_3.docx"
+            "oficio_path": "data/output/chipiar_2022_2023/oficio_3.docx"
           },
           {
             "rank": 4,
@@ -538,7 +538,7 @@
             "driver": "mennonite_agriculture",
             "stakeholder": "SERFOR + OEFA",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/chipiar_2021_2022/oficio_4.docx"
+            "oficio_path": "data/output/chipiar_2022_2023/oficio_4.docx"
           },
           {
             "rank": 5,
@@ -559,7 +559,7 @@
             "driver": "mennonite_agriculture",
             "stakeholder": "SERFOR + OEFA",
             "suggested_deadline": "2026-05-24",
-            "oficio_path": "data/output/chipiar_2021_2022/oficio_5.docx"
+            "oficio_path": "data/output/chipiar_2022_2023/oficio_5.docx"
           }
         ]
       },
