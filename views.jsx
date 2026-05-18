@@ -6,8 +6,8 @@ function TopBar({ onView, view }) {
     <div style={{ position: 'sticky', top: 0, zIndex: 30, background: 'var(--paper)', borderBottom: '1px solid var(--line)' }}>
       <div className="row" style={{ height: 72, padding: '0 28px', gap: 22, overflow: 'hidden' }}>
         <button className="row gap-12" style={{ flexShrink: 0 }} onClick={() => onView('selector')}>
-          <img src="logo.png" alt="ForestWorld"
-               style={{ width: 44, height: 44, objectFit: 'contain', display: 'block' }}
+          <img src="web_assets/logo.png" alt="ForestWorld"
+               style={{ width: 52, height: 52, objectFit: 'contain', display: 'block' }}
                onError={(e) => { e.currentTarget.style.display = 'none'; }} />
           <div className="col" style={{ lineHeight: 1.05 }}>
             <span style={{
