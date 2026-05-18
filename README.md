@@ -36,6 +36,8 @@ forestworld-web/
 
 The 4 AOIs are `boca_manu`, `la_pampa`, `masisea`, `chipiar`.
 
+> **Optional · how is this data generated?** If you want to understand the preprocessing that produces the rasters, damage masks and ranked cases, see [`preprocessing/README.md`](preprocessing/README.md). It is a read-only mirror of the pipeline that lives in the sibling `climate_risk_track` repo, included here as a reference.
+
 ## Regenerate web_assets
 
 From the sibling repo:
