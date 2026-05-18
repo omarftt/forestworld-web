@@ -4,12 +4,29 @@
 function TopBar({ onView, view }) {
   return (
     <div style={{ position: 'sticky', top: 0, zIndex: 30, background: 'var(--paper)', borderBottom: '1px solid var(--line)' }}>
-      <div className="row" style={{ height: 64, padding: '0 28px', gap: 22, overflow: 'hidden' }}>
-        <button className="row gap-10" style={{ flexShrink: 0 }} onClick={() => onView('selector')}>
-          <Icon.logo />
-          <div className="col" style={{ lineHeight: 1.15 }}>
-            <span className="fw-600 nowrap" style={{ fontSize: 15 }}>ForestWorld</span>
-            <span className="muted t-xs nowrap" style={{ fontSize: 11 }}>Inteligencia predictiva de riesgo forestal</span>
+      <div className="row" style={{ height: 72, padding: '0 28px', gap: 22, overflow: 'hidden' }}>
+        <button className="row gap-12" style={{ flexShrink: 0 }} onClick={() => onView('selector')}>
+          <img src="logo.png" alt="ForestWorld"
+               style={{ width: 44, height: 44, objectFit: 'contain', display: 'block' }}
+               onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+          <div className="col" style={{ lineHeight: 1.05 }}>
+            <span style={{
+              fontFamily: "'Inter', system-ui, sans-serif",
+              fontWeight: 800,
+              fontSize: 22,
+              letterSpacing: '-0.02em',
+              color: 'var(--forest-2)',
+              whiteSpace: 'nowrap',
+            }}>ForestWorld</span>
+            <span style={{
+              fontSize: 11.5,
+              color: 'var(--forest-2)',
+              opacity: 0.78,
+              fontWeight: 500,
+              whiteSpace: 'nowrap',
+              letterSpacing: '0.01em',
+              marginTop: 2,
+            }}>Inteligencia predictiva de riesgo forestal</span>
           </div>
         </button>
         <div className="vr" style={{ height: 28 }}></div>

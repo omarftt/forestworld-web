@@ -399,12 +399,18 @@ function _drawFooter(doc) {
 }
 
 function generateReportPDF(aoi, pair) {
-  if (!window.jspdf || !window.jspdf.jsPDF) {
-    alert('No se pudo cargar el generador de PDF. Revisa la conexión a internet.');
+  // jsPDF se carga como UMD: la mayoría de versiones expone window.jspdf.jsPDF,
+  // pero algunas builds exponen window.jsPDF a secas. Cubrimos ambos casos.
+  const JsPDF =
+    (window.jspdf && window.jspdf.jsPDF) ||
+    window.jsPDF ||
+    null;
+  if (!JsPDF) {
+    alert('No se pudo cargar el generador de PDF (jsPDF). Revisa la conexión a internet o vuelve a cargar la página.');
     return;
   }
   const cases = (aoi.ranking && pair && aoi.ranking[pair]) || [];
-  const doc = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4' });
+  const doc = new JsPDF({ unit: 'mm', format: 'a4' });
 
   let y = _drawHeader(doc, aoi, pair);
   y = _drawSummary(doc, aoi, cases, y);
