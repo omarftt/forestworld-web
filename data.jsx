@@ -1,178 +1,166 @@
-// ForestWorld data + manifest
+// ForestWorld — datos del frontend (ES)
+// Backend-driven: el catálogo de áreas viene de GET /aois.
 
-const SENTINEL_YEARS  = [2018, 2019, 2020, 2021, 2022, 2023, 2024];
-const MAPBIOMAS_YEARS = [2018, 2019, 2020, 2021, 2022];
-const DAMAGE_PERIODS  = [
-  { from: 2018, to: 2019 },
-  { from: 2019, to: 2020 },
-  { from: 2020, to: 2021 },
-  { from: 2021, to: 2022 },
-];
+// ---------- Fuente de datos ----------
+const API_BASE  = '';                // '' = mismo origen (sirve el archivo estático)
+const AOIS_PATH = '/aois.json';      // futuro: '/aois' apuntando al backend en Cloud Run
 
-function makePaths(id) {
-  const base = `web_assets/${id}`;
-  return {
-    sentinel:       (y)       => `${base}/sentinel_${y}.png`,
-    sentinelThumb:  (y)       => `${base}/sentinel_${y}_thumb.png`,
-    mapbiomas:      (y)       => `${base}/mapbiomas_${y}.png`,
-    mapbiomasThumb: (y)       => `${base}/mapbiomas_${y}_thumb.png`,
-    damage:         (from, to) => `${base}/damage_${from}_${to}.png`,
-    damageOverlay:  (from, to) => `${base}/damage_${from}_${to}_overlay.png`,
-    damageThumb:    (from, to) => `${base}/damage_${from}_${to}_thumb.png`,
-  };
+async function fetchAOIs() {
+  const r = await fetch(API_BASE + AOIS_PATH, { cache: 'no-store' });
+  if (!r.ok) throw new Error(`GET ${AOIS_PATH} → HTTP ${r.status}`);
+  return r.json();
 }
 
-const DEMO_LAYERS = {
-  sentinel:  { status: 'available', note: '7 composites uploaded (2018–2024)' },
-  mapbiomas: { status: 'available', note: '5 years uploaded (2018–2022)' },
-  damage:    { status: 'available', note: '4 transitions uploaded (2018→19 to 2021→22)' },
-  prediction:{ status: 'pending',   note: 'Model/backend not connected' },
-  context:   { status: 'pending',   note: 'Action layer not connected' },
-};
-
-const AOIS = [
-  {
-    id: 'boca_manu',
-    name: 'Boca Manu',
-    region: 'Madre de Dios, Peru',
-    coords: { lat: -12.275, lon: -71.00 },
-    coordsLabel: '12.276° S · 70.901° W',
-    driver: 'mixed frontier',
+// ---------- Lookup estático (lo que el backend NO devuelve) ----------
+// Solo posición del pin en el locator y un resumen corto por área. Todo
+// lo demás (nombre, región, capas, ranking, reporte) viene del backend.
+const AOI_STATIC = {
+  boca_manu: {
     marker: { left: '58.0%', top: '69.0%', labelOffset: 'right' },
-    summary: 'Pilot AOI near the Manu National Park buffer and Madre de Dios river. Mixed-driver frontier with mining encroachment and agricultural expansion.',
-    status: 'demo',
-    statusLabel: 'Demo loaded',
-    uploaded: true,
-    sentinelYears:  SENTINEL_YEARS,
-    mapbiomasYears: MAPBIOMAS_YEARS,
-    damageYears:    DAMAGE_PERIODS,
-    layers: DEMO_LAYERS,
-    paths: makePaths('boca_manu'),
-    damageStats: {
-      '2018_2019': { pixels: 11013, percent: 0.1201, hectares: 110.13 },
-      '2019_2020': { pixels: 38262, percent: 0.4172, hectares: 382.62 },
-      '2020_2021': { pixels: 31827, percent: 0.347,  hectares: 318.27 },
-      '2021_2022': { pixels: 52596, percent: 0.5735, hectares: 525.96 },
-    },
+    coordsLabel: '12.28° S · 70.90° O',
+    summary: 'Frente mixto cerca del Parque Nacional Manu, sobre el río Madre de Dios.',
   },
-  {
-    id: 'la_pampa',
-    name: 'La Pampa',
-    region: 'Madre de Dios, Peru',
-    coords: { lat: -12.866, lon: -69.665 },
-    coordsLabel: '12.866° S · 69.665° W',
-    driver: 'alluvial mining',
+  la_pampa: {
     marker: { left: '61.5%', top: '72.5%', labelOffset: 'bottom-right' },
-    summary: 'Alluvial-mining frontier south of the Inambari river — the most-documented illegal-mining hotspot in Madre de Dios.',
-    status: 'demo',
-    statusLabel: 'Demo loaded',
-    uploaded: true,
-    sentinelYears:  SENTINEL_YEARS,
-    mapbiomasYears: MAPBIOMAS_YEARS,
-    damageYears:    DAMAGE_PERIODS,
-    layers: DEMO_LAYERS,
-    paths: makePaths('la_pampa'),
-    damageStats: {
-      '2018_2019': { pixels: 603,   percent: 0.0048, hectares: 6.03 },
-      '2019_2020': { pixels: 1017,  percent: 0.008,  hectares: 10.17 },
-      '2020_2021': { pixels: 13617, percent: 0.1075, hectares: 136.17 },
-      '2021_2022': { pixels: 62199, percent: 0.4911, hectares: 621.99 },
-    },
+    coordsLabel: '12.87° S · 69.67° O',
+    summary: 'Frente minero aluvial al sur del río Inambari.',
   },
-  {
-    id: 'masisea',
-    name: 'Masisea',
-    region: 'Ucayali, Peru',
-    coords: { lat: -8.282, lon: -74.293 },
-    coordsLabel: '8.282° S · 74.293° W',
-    driver: 'Mennonite agriculture',
+  masisea: {
     marker: { left: '48.0%', top: '51.5%', labelOffset: 'right' },
-    summary: 'Pasture and mosaic-agriculture corridor along the Ucayali river. Mennonite-driven clearing pattern.',
-    status: 'demo',
-    statusLabel: 'Demo loaded',
-    uploaded: true,
-    sentinelYears:  SENTINEL_YEARS,
-    mapbiomasYears: MAPBIOMAS_YEARS,
-    damageYears:    DAMAGE_PERIODS,
-    layers: DEMO_LAYERS,
-    paths: makePaths('masisea'),
-    damageStats: {
-      '2018_2019': { pixels: 9981,  percent: 0.1307, hectares: 99.81 },
-      '2019_2020': { pixels: 17538, percent: 0.2297, hectares: 175.38 },
-      '2020_2021': { pixels: 36171, percent: 0.4738, hectares: 361.71 },
-      '2021_2022': { pixels: 16287, percent: 0.2133, hectares: 162.87 },
-    },
+    coordsLabel: '8.28° S · 74.29° O',
+    summary: 'Corredor de pastos y agricultura sobre el río Ucayali.',
   },
-  {
-    id: 'chipiar',
-    name: 'Chipiar / Padre Márquez',
-    region: 'Ucayali–Loreto frontier, Peru',
-    coords: { lat: -8.075, lon: -74.25 },
-    coordsLabel: '8.075° S · 74.250° W',
-    driver: 'Mennonite agriculture',
+  chipiar: {
     marker: { left: '48.5%', top: '48.0%', labelOffset: 'top-right' },
-    summary: 'Mennonite-agriculture frontier on the Ucayali–Loreto border, with the fastest year-over-year clearing rate in our pilot set.',
-    status: 'demo',
-    statusLabel: 'Demo loaded',
-    uploaded: true,
-    sentinelYears:  SENTINEL_YEARS,
-    mapbiomasYears: MAPBIOMAS_YEARS,
-    damageYears:    DAMAGE_PERIODS,
-    layers: DEMO_LAYERS,
-    paths: makePaths('chipiar'),
-    damageStats: {
-      '2018_2019': { pixels: 72960,  percent: 0.795,  hectares: 729.6 },
-      '2019_2020': { pixels: 106965, percent: 1.1655, hectares: 1069.65 },
-      '2020_2021': { pixels: 125685, percent: 1.3695, hectares: 1256.85 },
-      '2021_2022': { pixels: 42138,  percent: 0.4591, hectares: 421.38 },
-    },
+    coordsLabel: '8.08° S · 74.25° O',
+    summary: 'Frontera agrícola menonita entre Ucayali y Loreto.',
   },
-];
-
-const TABS = [
-  { id: 'satellite',  label: 'Satellite image',  short: 'Satellite',  sub: 'Sentinel-2 composite' },
-  { id: 'mapbiomas',  label: 'Land-cover map',   short: 'Land cover', sub: 'MapBiomas / GEE classification' },
-  { id: 'damage',     label: 'Damage mask',      short: 'Damage',     sub: 'Observed / derived damage mask' },
-  { id: 'prediction', label: 'Prediction',       short: 'Prediction', sub: 'Future damage probability' },
-  { id: 'backtest',   label: 'Backtest',         short: 'Backtest',   sub: 'Predicted vs observed' },
-];
-
-const MAPBIOMAS_CLASSES = [
-  { code: 3,  name: 'Forest formation',         color: '#1f8d49' },
-  { code: 6,  name: 'Flooded forest',           color: '#007785' },
-  { code: 11, name: 'Wetland',                  color: '#45c2a5' },
-  { code: 15, name: 'Pasture',                  color: '#edde8e' },
-  { code: 21, name: 'Mosaic of uses',           color: '#f5d76e' },
-  { code: 24, name: 'Urban area',               color: '#af2a2a' },
-  { code: 25, name: 'Other non-vegetated area', color: '#d4ac3a' },
-  { code: 33, name: 'River, lake & ocean',      color: '#2c6bd1' },
-];
-
-const BACKTEST_METRICS = [
-  { id: 'iou',         label: 'IoU',                sub: 'Intersection over union' },
-  { id: 'precision',   label: 'Precision @ K ha',   sub: 'Top-K hectares by probability' },
-  { id: 'area-error',  label: 'Area error',         sub: '|predicted − observed| (ha)' },
-  { id: 'direction',   label: 'Direction match',    sub: 'Change-sign agreement' },
-];
-
-const PIPELINE = [
-  { step: 1, label: 'Sentinel-2 composite',  status: 'available', note: '7 years loaded (2018–2024)' },
-  { step: 2, label: 'MapBiomas land cover',  status: 'available', note: '5 years loaded' },
-  { step: 3, label: 'Damage mask',           status: 'available', note: '4 transitions loaded' },
-  { step: 4, label: 'Model prediction',      status: 'pending',   note: 'Backend not connected' },
-  { step: 5, label: 'Action layer',          status: 'pending',   note: 'Not connected' },
-];
-
-const STATUS_META = {
-  available:    { label: 'Available',           tone: 'ok' },
-  uploaded:     { label: 'Uploaded',            tone: 'ok' },
-  not_uploaded: { label: 'Not uploaded',        tone: 'gray' },
-  local:        { label: 'Available locally',   tone: 'info' },
-  pending:      { label: 'Pending',             tone: 'amber' },
-  placeholder:  { label: 'Placeholder',         tone: 'gray' },
-  demo:         { label: 'Demo loaded',         tone: 'ok' },
 };
 
+// ---------- Etiquetas de pestañas (página de caso) ----------
+const TABS = [
+  { id: 'satellite',  label: 'Imagen satelital',    short: 'Satélite',  sub: 'Compuesto Sentinel-2' },
+  { id: 'mapbiomas',  label: 'Cobertura del suelo', short: 'Cobertura', sub: 'Clasificación MapBiomas / GEE' },
+  { id: 'damage',     label: 'Máscara de daño',     short: 'Daño',      sub: 'Máscara de daño observada' },
+  { id: 'prediction', label: 'Predicción',          short: 'Predicción', sub: 'Probabilidad de daño futuro' },
+];
+
+// ---------- Leyenda MapBiomas (nombres traducidos) ----------
+const MAPBIOMAS_CLASSES = [
+  { code: 3,  name: 'Formación de bosque',     color: '#1f8d49' },
+  { code: 6,  name: 'Bosque inundado',         color: '#007785' },
+  { code: 11, name: 'Humedal',                 color: '#45c2a5' },
+  { code: 15, name: 'Pasto',                   color: '#edde8e' },
+  { code: 21, name: 'Mosaico de usos',         color: '#f5d76e' },
+  { code: 24, name: 'Área urbana',             color: '#af2a2a' },
+  { code: 25, name: 'Suelo desnudo',           color: '#d4ac3a' },
+  { code: 33, name: 'Río, lago u océano',      color: '#2c6bd1' },
+];
+
+// ---------- Estado del catálogo ----------
+const STATUS_META = {
+  loaded:    { label: 'Cargado',       tone: 'ok' },
+  available: { label: 'Disponible',    tone: 'ok' },
+  pending:   { label: 'Próximamente',  tone: 'amber' },
+};
+
+// ---------- Helpers de formato (celdas de la tabla) ----------
+function formatYearRange(years) {
+  if (!years || years.length === 0) return null;
+  const sorted = [...years].sort((a, b) => a - b);
+  const n = sorted.length;
+  const word = n === 1 ? 'año' : 'años';
+  if (n === 1) return `1 ${word} · ${sorted[0]}`;
+  return `${n} ${word} · ${sorted[0]}–${sorted[n - 1]}`;
+}
+
+function _shortPair(p) {
+  // "2018_2019" → "2018→19"
+  const [a, b] = p.split('_');
+  return `${a}→${b.slice(-2)}`;
+}
+
+function formatPairRange(pairs) {
+  if (!pairs || pairs.length === 0) return null;
+  const sorted = [...pairs].sort();
+  const n = sorted.length;
+  const word = n === 1 ? 'período' : 'períodos';
+  if (n === 1) return `1 ${word} · ${_shortPair(sorted[0])}`;
+  return `${n} ${word} · ${_shortPair(sorted[0])} a ${_shortPair(sorted[n - 1])}`;
+}
+
+function countCases(ranking) {
+  if (!ranking) return 0;
+  return Object.values(ranking).reduce((acc, arr) => acc + (arr ? arr.length : 0), 0);
+}
+
+function formatCasesCount(n) {
+  if (!n) return null;
+  return `${n} ${n === 1 ? 'caso' : 'casos'}`;
+}
+
+// ---------- Driver en español ----------
+function driverEs(driver) {
+  const map = {
+    alluvial_mining:       'Minería aluvial',
+    mennonite_agriculture: 'Agricultura menonita',
+    mixed_frontier:        'Frontera mixta',
+  };
+  return map[driver] || driver || '—';
+}
+
+// ---------- Fecha en español (DD MMM YYYY) ----------
+const _MONTHS_ES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+function formatSpanishDate(iso) {
+  if (!iso) return '—';
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso);
+  if (!m) return iso;
+  const [, y, mm, dd] = m;
+  return `${parseInt(dd, 10)} ${_MONTHS_ES[parseInt(mm, 10) - 1]} ${y}`;
+}
+
+// ---------- Lat / Lon en español ----------
+function formatLatLon(lat, lon) {
+  if (lat == null || lon == null) return '—';
+  const ns = lat >= 0 ? 'N' : 'S';
+  const eo = lon >= 0 ? 'E' : 'O';
+  return `${Math.abs(lat).toFixed(2)}° ${ns} · ${Math.abs(lon).toFixed(2)}° ${eo}`;
+}
+
+// ---------- Limpia prefijo "del " en nombres de ANP ----------
+function cleanAnpName(name) {
+  if (!name) return '';
+  return name.replace(/^del\s+/i, '');
+}
+
+// ---------- Justificaciones de prioridad (mismo umbral que enrich.py) ----------
+function caseJustifications(c) {
+  if (!c) return [];
+  const lines = [];
+  const p = c.priority;
+
+  if (p === 'Alta') {
+    if (c.in_anp && c.anp_name) lines.push(`Dentro del ANP ${cleanAnpName(c.anp_name)}`);
+    if (c.in_territorio_indigena && c.territorio_name) lines.push(`Dentro del territorio ${c.territorio_name}`);
+    if (typeof c.area_ha === 'number' && c.area_ha > 20) lines.push(`Área extensa (${c.area_ha.toFixed(1)} ha)`);
+    if (typeof c.dist_rio_m === 'number' && c.dist_rio_m < 500) lines.push(`A ${Math.round(c.dist_rio_m)} m de un río`);
+  } else if (p === 'Media') {
+    if (typeof c.dist_rio_m === 'number' && c.dist_rio_m < 2000) lines.push(`Cerca de un río (${Math.round(c.dist_rio_m)} m)`);
+    if (typeof c.dist_carretera_m === 'number' && c.dist_carretera_m < 1000) lines.push(`Cerca de una carretera (${Math.round(c.dist_carretera_m)} m)`);
+    if (typeof c.area_ha === 'number' && c.area_ha > 5 && c.area_ha <= 20) lines.push(`Área moderada (${c.area_ha.toFixed(1)} ha)`);
+  }
+
+  if (lines.length === 0) lines.push('Sin factores agravantes detectados');
+  return lines;
+}
+
+// ---------- Total ha en una lista de casos ----------
+function totalHa(cases) {
+  if (!cases || cases.length === 0) return 0;
+  return cases.reduce((s, c) => s + (typeof c.area_ha === 'number' ? c.area_ha : 0), 0);
+}
+
+// ---------- Iconos ----------
 const Icon = {
   logo: (p) => (
     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" {...p}>
@@ -185,6 +173,9 @@ const Icon = {
   pin: (p) => (<svg width="14" height="14" viewBox="0 0 14 14" fill="none" {...p}><path d="M7 12.5C7 12.5 11 8.5 11 5.5C11 3.29 9.21 1.5 7 1.5C4.79 1.5 3 3.29 3 5.5C3 8.5 7 12.5 7 12.5Z" stroke="currentColor" strokeWidth="1.2"/><circle cx="7" cy="5.5" r="1.4" stroke="currentColor" strokeWidth="1.2"/></svg>),
   arrowRight: (p) => (<svg width="12" height="12" viewBox="0 0 12 12" fill="none" {...p}><path d="M2.5 6H9.5M9.5 6L7 3.5M9.5 6L7 8.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/></svg>),
   arrowLeft: (p) => (<svg width="14" height="14" viewBox="0 0 14 14" fill="none" {...p}><path d="M8 3.5L4.5 7L8 10.5M4.5 7H11" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/></svg>),
+  chevronLeft: (p) => (<svg width="14" height="14" viewBox="0 0 14 14" fill="none" {...p}><path d="M8.5 3.5L5 7L8.5 10.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>),
+  chevronRight: (p) => (<svg width="14" height="14" viewBox="0 0 14 14" fill="none" {...p}><path d="M5.5 3.5L9 7L5.5 10.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>),
+  chevronDown: (p) => (<svg width="12" height="12" viewBox="0 0 12 12" fill="none" {...p}><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>),
   download: (p) => (<svg width="14" height="14" viewBox="0 0 14 14" fill="none" {...p}><path d="M7 1.75v7M7 8.75L4.5 6.25M7 8.75L9.5 6.25M2.5 11v1.25h9V11" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/></svg>),
   clock: (p) => (<svg width="12" height="12" viewBox="0 0 12 12" fill="none" {...p}><circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="1.1"/><path d="M6 3.5V6L7.75 7.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg>),
   check: (p) => (<svg width="12" height="12" viewBox="0 0 12 12" fill="none" {...p}><path d="M2.5 6.5L5 9L9.5 3.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/></svg>),
@@ -196,13 +187,29 @@ const Icon = {
   search: (p) => (<svg width="14" height="14" viewBox="0 0 14 14" fill="none" {...p}><circle cx="6" cy="6" r="4" stroke="currentColor" strokeWidth="1.2"/><path d="M9 9L12 12" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg>),
 };
 
+// ---------- Badge de estado ----------
 function StatusBadge({ status, children }) {
-  const meta = STATUS_META[status] || STATUS_META.placeholder;
-  const cls = meta.tone === 'ok' ? 'badge-ok'
-    : meta.tone === 'amber' ? 'badge-pending'
-    : meta.tone === 'info' ? 'badge-info'
-    : 'badge-gray';
+  const meta = STATUS_META[status] || STATUS_META.loaded;
+  const cls = meta.tone === 'ok' ? 'badge-ok' : meta.tone === 'amber' ? 'badge-pending' : 'badge-gray';
   return <span className={`badge ${cls}`}><span className="dot"></span>{children || meta.label}</span>;
 }
 
-Object.assign(window, { AOIS, TABS, MAPBIOMAS_CLASSES, BACKTEST_METRICS, PIPELINE, STATUS_META, Icon, StatusBadge });
+Object.assign(window, {
+  fetchAOIs,
+  AOI_STATIC,
+  TABS,
+  MAPBIOMAS_CLASSES,
+  STATUS_META,
+  Icon,
+  StatusBadge,
+  formatYearRange,
+  formatPairRange,
+  countCases,
+  formatCasesCount,
+  driverEs,
+  formatSpanishDate,
+  formatLatLon,
+  cleanAnpName,
+  caseJustifications,
+  totalHa,
+});
