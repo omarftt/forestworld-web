@@ -1,6 +1,6 @@
 # forestworld-web
 
-Static frontend for ForestWorld — Amazon forest-risk intelligence. React + Babel-standalone, no build step. Reads PNG rasters + JSON metadata from `web_assets/`.
+Frontend for ForestWorld — Amazon forest-risk intelligence.
 
 Backend + data pipeline live in [`climate_risk_track`](https://github.com/angiesanchezm/climate_risk_track/tree/main). That pipeline writes the PNGs you see in `web_assets/` and produces the `aois.json` this app consumes.
 
@@ -12,7 +12,6 @@ python -m http.server 8000
 
 Open http://localhost:8000.
 
-A static server is required — opening `index.html` via `file://` will fail because the JSX files are loaded with `<script src>`.
 
 ## Project layout
 
@@ -38,11 +37,10 @@ The 4 AOIs are `boca_manu`, `la_pampa`, `masisea`, `chipiar`.
 
 ## Regenerate web_assets
 
-The PNGs and `aois.json` are produced by the data pipeline in [`climate_risk_track`](https://github.com/angiesanchezm/climate_risk_track/tree/main). Clone that repo as a sibling on disk and run its pipeline; outputs are written back into this repo's `web_assets/` automatically.
+The PNGs and `aois.json` are produced by the data pipeline in [`climate_risk_track`](https://github.com/angiesanchezm/climate_risk_track/tree/main). Clone that repo as a sibling on disk and run its pipeline.
 
 ## Deploy to Vercel
 
-Easiest path (no Git required):
 
 ```
 npm i -g vercel
